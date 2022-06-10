@@ -33,7 +33,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-  
+h1,h2{
+  color: #dfdfe7;
+}
   p {
     line-height: 1.5;
     font-family: sans-serif;

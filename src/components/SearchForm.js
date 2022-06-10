@@ -24,6 +24,6 @@ const Input = styled.input`
 `;
 const StyledLabel = styled.h1`
   height: 60px;
-  color: #dfdfe7;
+  /*   color: #dfdfe7; */
   font-size: 3rem;
 `;
