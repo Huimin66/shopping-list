@@ -4,12 +4,15 @@ import SearchForm from "./components/SearchForm";
 import SearchList from "./components/SearchList";
 import ShoppingList from "./components/ShoppingList";
 import { useEffect, useState } from "react";
+import { getFromLocal, setToLocal } from "../src/lib/localStorage";
 /* import { useImmer } from "use-immer"; */
 
 function App() {
   const [allItems, setAllItems] = useState([]);
   const [searchItems, setSearchItems] = useState([]);
-  const [shopItems, setShopItems] = useState([]);
+  const [shopItems, setShopItems] = useState(
+    getFromLocal("shoppingList") ?? []
+  );
   const [inputValue, setInputValue] = useState("");
 
   /* load the data from API */
@@ -18,6 +21,8 @@ function App() {
       .then((response) => response.json())
       .then((fetchdata) => setAllItems(fetchdata.data));
   }, []);
+
+  useEffect(() => setToLocal("shoppingList", shopItems), [shopItems]);
 
   /* wenn input something in the input field, return data than includes the input value */
   function filterItem(input) {
