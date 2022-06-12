@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-function SearchList({ searchItems, onClickSearchItem, inputValue }) {
+function SearchList({ searchItems, onClickSearchItem, inputValue, language }) {
   return (
-    <>
-      <h2>Find the following fruits:</h2>
-      <ShoppingListContainer>
+    <SearchListContainer>
+      {language === "en" ? <h2>Search Result:</h2> : <h2>Suchergebnis:</h2>}
+
+      <SearchItemContainer>
         {inputValue && searchItems.length === 0 ? (
           <StyledP>
             We could not find what you were looking for.For that we are truly
@@ -17,19 +18,23 @@ function SearchList({ searchItems, onClickSearchItem, inputValue }) {
                 key={item._id}
                 onClick={() => onClickSearchItem(item._id)}
               >
-                {item.name.en}
+                {language === "en" ? item.name.en : item.name.de}
               </ItemButton>
             );
           })
         )}
-      </ShoppingListContainer>
-    </>
+      </SearchItemContainer>
+    </SearchListContainer>
   );
 }
 
 export default SearchList;
 
-const ShoppingListContainer = styled.div`
+const SearchListContainer = styled.div`
+  width: 100%;
+`;
+
+const SearchItemContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -37,11 +42,10 @@ const ShoppingListContainer = styled.div`
 `;
 
 const ItemButton = styled.button`
-  font-size: 2rem;
   padding: 0.5rem;
-  border-radius: 8px;
   background-color: lightblue;
 `;
 const StyledP = styled.p`
   color: pink;
+  font-size: 1.5rem;
 `;

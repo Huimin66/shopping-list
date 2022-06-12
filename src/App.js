@@ -1,30 +1,39 @@
 //import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { getFromLocal, setToLocal } from "../src/lib/localStorage";
 import SearchForm from "./components/SearchForm";
 import SearchList from "./components/SearchList";
 import ShoppingList from "./components/ShoppingList";
-import { useEffect, useState } from "react";
-import { getFromLocal, setToLocal } from "../src/lib/localStorage";
+import LanguageOption from "./components/LanguageOpiton";
+
 /* import { useImmer } from "use-immer"; */
 
 function App() {
   const [allItems, setAllItems] = useState([]);
   const [searchItems, setSearchItems] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [language, setLanguage] = useState(getFromLocal("language") ?? []);
   const [shopItems, setShopItems] = useState(
     getFromLocal("shoppingList") ?? []
   );
-  const [inputValue, setInputValue] = useState("");
 
   /* load the data from API */
   useEffect(() => {
     fetch("https://fetch-me.vercel.app/api/shopping/items")
       .then((response) => response.json())
-      .then((fetchdata) => setAllItems(fetchdata.data));
+      .then((fruitsData) => setAllItems(fruitsData.data))
+      .catch(error);
   }, []);
 
-  useEffect(() => setToLocal("shoppingList", shopItems), [shopItems]);
+  function error() {
+    console.log("Fetch fruits data failed!");
+  }
 
-  /* wenn input something in the input field, return data than includes the input value */
+  useEffect(() => setToLocal("shoppingList", shopItems), [shopItems]);
+  useEffect(() => setToLocal("language", language), [language]);
+
+  /* When input something in the input field, return data that includes the input value */
   function filterItem(input) {
     let reg = new RegExp(input, "i");
     input
@@ -33,27 +42,37 @@ function App() {
     setInputValue(input);
   }
 
-  /* wenn click on a search result, add this item to the shopping list */
+  /* When click on a search result, add this item to the shopping list */
   function addNewItemToShopList(id) {
     const newShopItem = searchItems.find((item) => item._id === id);
-    if (!shopItems.includes(newShopItem))
+    if (!shopItems.find((item) => item._id === newShopItem._id))
       setShopItems([...shopItems, newShopItem]);
   }
 
-  /* wenn click on a item in shopping list, remove this item */
+  /* When click on a item in shopping list, remove this item */
   function removeShopItem(id) {
     setShopItems(shopItems.filter((item) => item._id !== id));
   }
 
+  function handleLanguage(language) {
+    setLanguage(language);
+  }
+
   return (
     <AppContainer>
-      <SearchForm onInputChange={filterItem} />
+      <LanguageOption onClickLanguage={handleLanguage} />
+      <SearchForm language={language} onInputChange={filterItem} />
       <SearchList
+        language={language}
         searchItems={searchItems}
         onClickSearchItem={addNewItemToShopList}
         inputValue={inputValue}
       />
-      <ShoppingList shopItems={shopItems} onClickShopItem={removeShopItem} />
+      <ShoppingList
+        language={language}
+        shopItems={shopItems}
+        onClickShopItem={removeShopItem}
+      />
     </AppContainer>
   );
 }
@@ -61,8 +80,7 @@ function App() {
 const AppContainer = styled.div`
   display: grid;
   justify-items: left;
-  gap: 2rem;
-  margin: 2rem auto;
-  padding: 1rem;
+  gap: 3rem;
 `;
+
 export default App;

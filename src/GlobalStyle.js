@@ -33,9 +33,15 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-h1,h2{
-  color: #dfdfe7;
-}
+
+  h1,h2{
+    color: #dfdfe7;
+    font-size:2rem;
+    margin:1rem 0;
+  }
+
+
+
   p {
     line-height: 1.5;
     font-family: sans-serif;
@@ -44,9 +50,10 @@ h1,h2{
   input,
   button,
   select,
-  textarea {
+  textarea ,div{
     outline: none;
     border: none;
+    border-radius: 0.2rem;
   }
   
   textarea {

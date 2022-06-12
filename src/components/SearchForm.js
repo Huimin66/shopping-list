@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-function SearchForm({ onInputChange }) {
+function SearchForm({ onInputChange, language }) {
   return (
     <Form aria-labelledby="formHeader" autoComplete="off">
-      <StyledLabel id="formHeader">What do you want to buy?</StyledLabel>
+      {language === "en" ? (
+        <h1 id="formHeader">What do you want to buy?</h1>
+      ) : (
+        <h1 id="formHeader">Was willst du kaufen?</h1>
+      )}
+
       <Input onChange={(event) => onInputChange(event.target.value)}></Input>
     </Form>
   );
@@ -12,18 +17,11 @@ function SearchForm({ onInputChange }) {
 export default SearchForm;
 
 const Form = styled.form`
-  width: 90%;
+  width: 100%;
   display: grid;
-  gap: 10px;
 `;
 
 const Input = styled.input`
-  height: 3rem;
-  font-size: 2rem;
-  border-radius: 8px;
-`;
-const StyledLabel = styled.h1`
-  height: 60px;
-  /*   color: #dfdfe7; */
-  font-size: 3rem;
+  height: 2rem;
+  padding: 0.5rem;
 `;
