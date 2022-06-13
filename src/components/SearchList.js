@@ -24,8 +24,7 @@ function SearchList({ searchItems, onClickSearchItem, inputValue, language }) {
             </StyledP>
           ) : (
             <StyledP>
-              Wir konnten nicht finden, wonach Sie gesucht haben. Dafür sind wir
-              wirklich da Verzeihung.
+              Wir konnten nicht finden, wonach Sie gesucht haben. Tut mir leid.
             </StyledP>
           )
         ) : (
