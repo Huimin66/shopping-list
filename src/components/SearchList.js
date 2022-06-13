@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 function SearchList({ searchItems, onClickSearchItem, inputValue, language }) {
-  return (
+  return !inputValue ? (
+    <></>
+  ) : (
     <SearchListContainer>
       {inputValue ? (
         language === "en" ? (
