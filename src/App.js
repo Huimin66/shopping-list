@@ -1,25 +1,86 @@
-import logo from './logo.svg';
-import './App.css';
+//import { Routes, Route } from "react-router-dom";
+import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { getFromLocal, setToLocal } from "../src/lib/localStorage";
+import SearchForm from "./components/SearchForm";
+import SearchList from "./components/SearchList";
+import ShoppingList from "./components/ShoppingList";
+import LanguageOption from "./components/LanguageOpiton";
+
+/* import { useImmer } from "use-immer"; */
 
 function App() {
+  const [allItems, setAllItems] = useState([]);
+  const [searchItems, setSearchItems] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [language, setLanguage] = useState(getFromLocal("language") ?? []);
+  const [shopItems, setShopItems] = useState(
+    getFromLocal("shoppingList") ?? []
+  );
+
+  /* load the data from API */
+  useEffect(() => {
+    fetch("https://fetch-me.vercel.app/api/shopping/items")
+      .then((response) => response.json())
+      .then((fruitsData) => setAllItems(fruitsData.data))
+      .catch(error);
+  }, []);
+
+  function error() {
+    console.log("Fetch fruits data failed!");
+  }
+
+  useEffect(() => setToLocal("shoppingList", shopItems), [shopItems]);
+  useEffect(() => setToLocal("language", language), [language]);
+
+  /* When input something in the input field, return data that includes the input value */
+  function filterItem(input) {
+    let reg = new RegExp(input, "i");
+    input
+      ? setSearchItems(allItems.filter((item) => item.name.en.match(reg)))
+      : setSearchItems([]);
+    setInputValue(input);
+  }
+
+  /* When click on a search result, add this item to the shopping list */
+  function addNewItemToShopList(id) {
+    const newShopItem = searchItems.find((item) => item._id === id);
+    if (!shopItems.find((item) => item._id === newShopItem._id))
+      setShopItems([...shopItems, newShopItem]);
+  }
+
+  /* When click on a item in shopping list, remove this item */
+  function removeShopItem(id) {
+    setShopItems(shopItems.filter((item) => item._id !== id));
+  }
+
+  function handleLanguage(language) {
+    setLanguage(language);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <LanguageOption onClickLanguage={handleLanguage} />
+      <SearchForm language={language} onInputChange={filterItem} />
+      <SearchList
+        language={language}
+        searchItems={searchItems}
+        onClickSearchItem={addNewItemToShopList}
+        inputValue={inputValue}
+      />
+      <ShoppingList
+        language={language}
+        shopItems={shopItems}
+        onClickShopItem={removeShopItem}
+      />
+    </AppContainer>
   );
 }
+
+const AppContainer = styled.div`
+  display: grid;
+  justify-items: left;
+  gap: 3rem;
+`;
 
 export default App;
