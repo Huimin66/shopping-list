@@ -6,7 +6,7 @@ function SearchForm({ onInputChange, language }) {
       {language === "en" ? (
         <h1 id="formHeader">What do you want to buy?</h1>
       ) : (
-        <h1 id="formHeader">Was willst du kaufen?</h1>
+        <h1 id="formHeader">Was willst du einkaufen?</h1>
       )}
 
       <Input onChange={(event) => onInputChange(event.target.value)}></Input>
