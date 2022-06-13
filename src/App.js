@@ -83,6 +83,9 @@ function App() {
 }
 
 const AppContainer = styled.div`
+  background-color: rgb(132 148 161);
+  max-width: 600px;
+  margin: 2rem auto;
   display: grid;
   justify-items: left;
   gap: 3rem;

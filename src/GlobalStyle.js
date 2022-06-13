@@ -15,11 +15,11 @@ const GlobalStyle = createGlobalStyle`
     display: grid;
     grid-template-rows: 60px auto 60px;
     height: 100vh;
-    background-color: rgb(132 148 161);
+
     font-family: sans-serif;
     font-size:2rem;
     max-width:600px;
-    margin:0 auto;
+    margin:2rem auto;
   }
   
   ul,
