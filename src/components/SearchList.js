@@ -3,20 +3,24 @@ import styled from "styled-components";
 function SearchList({ searchItems, onClickSearchItem, inputValue, language }) {
   return (
     <SearchListContainer>
-      {language === "en" ? <h2>Search Result:</h2> : <h2>Suchergebnis:</h2>}
-
       <SearchItemContainer>
         {inputValue && searchItems.length === 0 ? (
           language === "en" ? (
-            <StyledP>
-              We could not find what you were looking for.For that we are truly
-              sorry.
-            </StyledP>
+            <>
+              <h2>Search Result:</h2>
+              <StyledP>
+                We could not find what you were looking for.For that we are
+                truly sorry.
+              </StyledP>
+            </>
           ) : (
-            <StyledP>
-              Wir konnten nicht finden, wonach Sie gesucht haben. Dafür sind wir
-              wirklich da Verzeihung.
-            </StyledP>
+            <>
+              <h2>Suchergebnis:</h2>
+              <StyledP>
+                Wir konnten nicht finden, wonach Sie gesucht haben. Dafür sind
+                wir wirklich da Verzeihung.
+              </StyledP>
+            </>
           )
         ) : (
           searchItems.map((item) => {
