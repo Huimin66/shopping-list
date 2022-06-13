@@ -13,13 +13,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 1.5rem;
     padding: 0;
     display: grid;
-    grid-template-rows: 60px auto 60px;
+
     height: 100vh;
 
     font-family: sans-serif;
     font-size:2rem;
-    max-width:600px;
-    margin:2rem auto;
+
   }
   
   ul,

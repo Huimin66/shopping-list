@@ -84,6 +84,7 @@ function App() {
 
 const AppContainer = styled.div`
   background-color: rgb(132 148 161);
+  padding: 1rem;
   max-width: 600px;
   margin: 2rem auto;
   display: grid;
