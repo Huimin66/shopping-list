@@ -32,7 +32,7 @@ function SearchList({ searchItems, onClickSearchItem, inputValue, language }) {
             return (
               <ItemButton
                 key={item._id}
-                onClick={() => onClickSearchItem(item._id)}
+                onClick={() => onClickSearchItem(item)}
               >
                 {language === "en" ? item.name.en : item.name.de}
               </ItemButton>
