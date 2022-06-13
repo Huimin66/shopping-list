@@ -37,7 +37,12 @@ function App() {
   function filterItem(input) {
     let reg = new RegExp(input, "i");
     input
-      ? setSearchItems(allItems.filter((item) => item.name.en.match(reg)))
+      ? setSearchItems(
+          allItems.filter((item) => {
+            if (language === "en") return item.name.en.match(reg);
+            else return item.name.de.match(reg);
+          })
+        )
       : setSearchItems([]);
     setInputValue(input);
   }
