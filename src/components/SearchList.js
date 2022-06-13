@@ -7,10 +7,17 @@ function SearchList({ searchItems, onClickSearchItem, inputValue, language }) {
 
       <SearchItemContainer>
         {inputValue && searchItems.length === 0 ? (
-          <StyledP>
-            We could not find what you were looking for.For that we are truly
-            sorry.
-          </StyledP>
+          language === "en" ? (
+            <StyledP>
+              We could not find what you were looking for.For that we are truly
+              sorry.
+            </StyledP>
+          ) : (
+            <StyledP>
+              Wir konnten nicht finden, wonach Sie gesucht haben. Dafür sind wir
+              wirklich da Verzeihung.
+            </StyledP>
+          )
         ) : (
           searchItems.map((item) => {
             return (
@@ -46,6 +53,6 @@ const ItemButton = styled.button`
   background-color: lightblue;
 `;
 const StyledP = styled.p`
-  color: pink;
+  color: black;
   font-size: 1.5rem;
 `;
