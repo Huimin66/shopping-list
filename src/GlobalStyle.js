@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: sans-serif;
     font-size:2rem;
     max-width:600px;
+    margin:0 auto;
   }
   
   ul,
