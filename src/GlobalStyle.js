@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: rgb(132 148 161);
     font-family: sans-serif;
     font-size:2rem;
+    max-width:600px;
   }
   
   ul,
