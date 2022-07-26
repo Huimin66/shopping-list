@@ -8,7 +8,7 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 function ShoppingList({ shopItems, onClickShopItem, language }) {
   library.add(faCaretDown, faCaretUp);
 
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useImmer([]);
   const [categoryCollapseObjs, setCategoryCollapseObjs] = useImmer([]);
 
   /* load categoriy information from API */
