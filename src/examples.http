@@ -1,0 +1,57 @@
+###
+GET https://vercel-todo-one.vercel.app/api/todos
+###
+
+###
+GET https://vercel-todo-one.vercel.app/api/todos/62aaeb30473d1f9cea4099a3
+###
+
+###
+PUT https://vercel-todo-one.vercel.app/api/todos/62aaeb30473d1f9cea4099a3
+Content-Type: application/json
+
+{
+    "description": "Todolist von heute",
+    "done": true
+}
+
+
+###
+POST https://vercel-todo-one.vercel.app/api/todos/
+Content-Type: application/json
+
+{
+    "description": "Sind alle schon fertig",
+    "done": true
+}
+
+###
+
+###
+POST https://vercel-todo-one.vercel.app/api/todos/
+Content-Type: application/json
+
+{
+    "description": "Todolist von heute",
+    "done": true
+}
+###
+
+###
+DELETE  https://vercel-todo-one.vercel.app/api/todos/62aafa164f0a10c66075076e
+Content-Type: application/json
+
+{
+    "description": "Todolist von heute",
+    "done": true
+}
+###
+
+###
+PATCH  https://vercel-todo-one.vercel.app/api/todos/62aafb2e4f0a10c660750785
+Content-Type: application/json
+
+{
+    "done": false
+}
+###

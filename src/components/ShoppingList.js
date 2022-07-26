@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -7,6 +7,7 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 function ShoppingList({ shopItems, onClickShopItem, language }) {
   library.add(faCaretDown, faCaretUp);
+
   const [categories, setCategories] = useImmer([]);
   const [categoryCollapseObjs, setCategoryCollapseObjs] = useImmer([]);
 
@@ -22,7 +23,7 @@ function ShoppingList({ shopItems, onClickShopItem, language }) {
     setCategoryCollapseObjs(
       categories.map((category) => ({ id: category._id, collaps: false }))
     );
-  }, [categories]);
+  }, [categories, setCategoryCollapseObjs]);
 
   function error() {
     console.log("Fetch categories data failed!");
